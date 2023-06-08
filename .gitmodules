@@ -2,3 +2,7 @@
        path = website/themes/docsy
        url = https://github.com/google/docsy
 
+[submodule "upstream"]
+	path = upstream
+	url = https://github.com/nishantapatil3/manifests.git
+	branch = standalone

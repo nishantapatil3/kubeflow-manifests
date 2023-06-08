@@ -53,12 +53,12 @@ install-helm:
 	helm version
 
 install-python:
-	sudo apt install -q python3.8 -y 
+	sudo apt install -q python3.11 -y
 	sudo apt install -q python3-pip -y
-	python3.8 -m pip install --upgrade pip
+	python3.11 -m pip install --upgrade pip
 
 install-python-packages:
-	python3.8 -m pip install -r tests/e2e/requirements.txt
+	python3.11 -m pip install -r tests/e2e/requirements.txt
 
 install-tools: install-awscli install-eksctl install-kubectl install-kustomize install-yq install-jq install-terraform install-helm install-python install-python-packages
 
@@ -90,23 +90,23 @@ port-forward:
 bootstrap-ack: verify-cluster-variables connect-to-eks-cluster
 	yq e '.cluster.name=env(CLUSTER_NAME)' -i tests/e2e/utils/ack_sm_controller_bootstrap/config.yaml
 	yq e '.cluster.region=env(CLUSTER_REGION)' -i tests/e2e/utils/ack_sm_controller_bootstrap/config.yaml
-	cd tests/e2e && PYTHONPATH=.. python3.8 utils/ack_sm_controller_bootstrap/setup_sm_controller_req.py
+	cd tests/e2e && PYTHONPATH=.. python3.11 utils/ack_sm_controller_bootstrap/setup_sm_controller_req.py
 
 cleanup-ack-req: verify-cluster-variables
 	yq e '.cluster.name=env(CLUSTER_NAME)' -i tests/e2e/utils/ack_sm_controller_bootstrap/config.yaml
 	yq e '.cluster.region=env(CLUSTER_REGION)' -i tests/e2e/utils/ack_sm_controller_bootstrap/config.yaml
-	cd tests/e2e && PYTHONPATH=.. python3.8 utils/ack_sm_controller_bootstrap/cleanup_sm_controller_req.py
+	cd tests/e2e && PYTHONPATH=.. python3.11 utils/ack_sm_controller_bootstrap/cleanup_sm_controller_req.py
 
-deploy-kubeflow: bootstrap-ack
+deploy-kubeflow: #bootstrap-ack
 	$(eval DEPLOYMENT_OPTION:=vanilla)
 	$(eval INSTALLATION_OPTION:=kustomize)
 	$(eval PIPELINE_S3_CREDENTIAL_OPTION:=irsa)
-	cd tests/e2e && PYTHONPATH=.. python3.8 utils/kubeflow_installation.py --deployment_option $(DEPLOYMENT_OPTION) --installation_option $(INSTALLATION_OPTION) --pipeline_s3_credential_option $(PIPELINE_S3_CREDENTIAL_OPTION) --cluster_name $(CLUSTER_NAME)
+	cd tests/e2e && PYTHONPATH=.. python3.11 utils/kubeflow_installation.py --deployment_option $(DEPLOYMENT_OPTION) --installation_option $(INSTALLATION_OPTION) --pipeline_s3_credential_option $(PIPELINE_S3_CREDENTIAL_OPTION) --cluster_name $(CLUSTER_NAME)
 
 delete-kubeflow:
 	$(eval DEPLOYMENT_OPTION:=vanilla)
 	$(eval INSTALLATION_OPTION:=kustomize)
-	cd tests/e2e && PYTHONPATH=.. python3.8 utils/kubeflow_uninstallation.py --deployment_option $(DEPLOYMENT_OPTION) --installation_option $(INSTALLATION_OPTION)
+	cd tests/e2e && PYTHONPATH=.. python3.11 utils/kubeflow_uninstallation.py --deployment_option $(DEPLOYMENT_OPTION) --installation_option $(INSTALLATION_OPTION)
 
 helmify:
-	PYTHONPATH=. python3.8 tools/helmify/src/kustomize_to_helm_automation.py
+	PYTHONPATH=. python3.11 tools/helmify/src/kustomize_to_helm_automation.py
