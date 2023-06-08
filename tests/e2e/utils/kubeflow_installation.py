@@ -30,11 +30,11 @@ INSTALLATION_CONFIG_COGNITO_RDS_S3_STATIC = (
 
 
 Install_Sequence = [
-    "cert-manager",
-    "istio",
+    # "cert-manager",
+    # "istio",
     "dex",
     "oidc-authservice",
-    "cluster-local-gateway",
+    # "cluster-local-gateway",
     "kubeflow-namespace",
     "kubeflow-istio-resources",
     "kubeflow-roles",

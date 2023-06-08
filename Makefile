@@ -85,7 +85,7 @@ connect-to-eks-cluster: verify-cluster-variables
 port-forward:
 	$(eval IP_ADDRESS:=127.0.0.1)
 	$(eval PORT:=8080)
-	kubectl port-forward svc/istio-ingressgateway --address $(IP_ADDRESS) -n istio-system $(PORT):80
+	kubectl port-forward svc/kubeflow-imgw --address $(IP_ADDRESS) -n kubeflow $(PORT):80
 
 bootstrap-ack: verify-cluster-variables connect-to-eks-cluster
 	yq e '.cluster.name=env(CLUSTER_NAME)' -i tests/e2e/utils/ack_sm_controller_bootstrap/config.yaml
