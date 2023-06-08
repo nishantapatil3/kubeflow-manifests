@@ -153,6 +153,14 @@ kubeflow-istio-resources:
     helm: 
       paths: ../../charts/common/kubeflow-istio-resources
 
+calisti-istio-ingressmeshgateway:
+  installation_options:
+    kustomize:
+      paths:
+        - ../../upstream/common/calisti/base
+    helm:
+      paths: ../../charts/common/calisti/base
+
 #kserve
 kserve:
   installation_options:

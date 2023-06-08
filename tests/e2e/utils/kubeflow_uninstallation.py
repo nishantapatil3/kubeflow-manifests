@@ -57,6 +57,7 @@ Uninstall_Sequence = [
     # "cluster-local-gateway",
     "oidc-authservice",
     "dex",
+    "calisti-istio-ingressmeshgateway",
     # "istio",
     # "cert-manager",
     "aws-telemetry",

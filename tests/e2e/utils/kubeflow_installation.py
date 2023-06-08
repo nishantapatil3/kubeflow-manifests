@@ -32,6 +32,7 @@ INSTALLATION_CONFIG_COGNITO_RDS_S3_STATIC = (
 Install_Sequence = [
     # "cert-manager",
     # "istio",
+    "calisti-istio-ingressmeshgateway",
     "dex",
     "oidc-authservice",
     # "cluster-local-gateway",

@@ -5,4 +5,4 @@
 [submodule "upstream"]
 	path = upstream
 	url = https://github.com/nishantapatil3/manifests.git
-	branch = manifest/calisti
+	branch = calisti/manifests
